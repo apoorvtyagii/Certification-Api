@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    <div class="center">
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <form action='/register' method='post'>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Name</span>
+            <input type="text" class="form-control" name='register_name' placeholder="Name" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Email</span>
+            <input type="text" class="form-control" name='register_email' placeholder="Email" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Password</span>
+            <input type="text" class="form-control" name='register_password' placeholder="Password" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <p><input type='submit' class="btn btn-primary btn-lg" value='submit' /></p>
+
+        <p>Already have an account!! <a class="btn btn-primary" href="/login">Log In</a></p>
+    </form>
+</div>
+{% endblock %}

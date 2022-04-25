@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% if content %}
+        <h1>home page</h1>
+        {% for i in content %}
+            <b>{{i}}</b>
+        {% endfor %}
+        <br>
+        {% for _ in range(2) %}
+            <b>{{x}}</b>
+        {% endfor %}
+    {% else %}
+        <b>you are not logged in, login to access home page!!</b>
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% for i in objects %}
+        <p>
+            <!-- <i><u>{{ i['id'] }}</u></i> -->
+            <i>Name: </i><b>{{ i['name'] }}</b>
+            <i>Email: </i><b>{{ i['email'] }}</b>
+            <i>Password: </i><b>{{ i['password'] }},</b>
+        </p>
+    {% endfor %}
+{% endblock %}
