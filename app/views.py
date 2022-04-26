@@ -29,6 +29,7 @@ def admin(name='apoorvtyagi'):
     return render_template("admin.html", content=[name.upper(), 'is the admin of this site'], x='go back to login!!')
 
 @app.route("/login", methods=["POST", "GET"])
+@app.route("/api/login")
 def login():
     if request.method == "POST":
         email = request.form["email"]
@@ -120,7 +121,7 @@ def logout():
 
 
 def isUserpresent(email):
-    if User.objects.get(email=email):
+    if User.objects.filter(email=email):
         return True
     else:
         return False

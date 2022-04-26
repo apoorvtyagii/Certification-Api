@@ -13,14 +13,20 @@ class User(Document):
             'password': self.password
         }
 
-class Webapi(Document):
-    language = StringField(max_length=50)
-    lang_id = StringField(max_length=50, required=True)
+class Certifications(Document):
+    certificate = StringField(max_length=50)
+    experience = StringField(max_length=50)
+    certification_date = StringField(max_length=50)
+    certificate_id = StringField(max_length=50, required=True)
     status = StringField(max_length=50)
+    user_email = EmailField(max_length=50)
 
     def to_json(self):
         return {
-            'language': self.language,
-            'lang_id': self.lang_id,
-            'status': self.status
+            'certificate': self.certificate,
+            'experience': self.experience,
+            'certification_date': self.certification_date,
+            'certificate_id': self.certificate_id,
+            'status': self.status,
+            'user_email': self.user_email,
         }
