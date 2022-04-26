@@ -2,20 +2,11 @@ from flask import jsonify, redirect, url_for, render_template, request, session,
 from app import db, app, api
 from app.models import User
 
-# class loginRequired:
-#     def __init__(self, func):
-#         self.func = func
-#     def __call__(self, *args, **kwargs):
-#         if 'user' in session:
-#             self.function(*args, **kwargs)
-#         else:
-#             flash(f"Login Required to access this page", "info")
-#             return redirect(url_for("login"))
 
 def loginrequired(func):
     def wrpr(*args, **kwargs):
         if 'user' in session:
-            func(*args, **kwargs)
+            return func(*args, **kwargs)
         else:
             flash(f"Login Required to access this page", "info")
             return redirect(url_for("login"))
@@ -87,38 +78,39 @@ def deactivate():
             flash(f"NO DATA FOUND", "info")
     return redirect(url_for("login"))
 
-# @app.route('/registerapi', methods=['POST', 'GET'])
-# def dummy():
-#     if request.method == 'POST':
-#         email = request.form["register_email"]
-#         if isUserpresent(email):
-#             flash(f"YOU ALREADY HAVE AN ACCOUNT TRY LOG IN", "info")
-#             return redirect(url_for("login"))
-#         else:
-#             user = models.Api(language=request.form["register_name"], 
-#                         lang_id = email,
-#                         status=request.form['register_password'])
-#             user.save()
-#             return redirect(url_for("login"))
-#     else:
-#         return render_template("register.html")
 
+@app.route('/update', methods=['GET', 'POST'])
 @loginrequired
+def update():
+    user = User.objects.get(email = session['user'])
+    if request.method == 'POST':
+        update_dic = {
+            'name': request.form["update_name"],
+            'password': request.form["update_password"]
+        }
+        user.update(**update_dic)
+        user = User.objects.get(email = session['user'])
+    return render_template("update.html", objects=user)
+
+
 @app.route('/showall')
+@loginrequired
 def showall():
     objects =  User.find()
     return render_template("showall.html", objects=objects)
 
 
-@loginrequired
+
 @app.route("/user")
+@loginrequired
 def user():
     return redirect(url_for("home", name=session["name"]))
 
 
 
-@loginrequired
+
 @app.route("/logout")
+@loginrequired
 def logout():
     session.pop("user", None)
     session.pop("name", None)

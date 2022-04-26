@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}{% endblock %}
+
+{% block body %}
+    {% if objects %}
+        <p>
+            <i>my name is: </i><b>{{ objects['name'] }}</b>
+            <i>my email is: </i><b>{{ objects['email'] }}</b>
+            <i>my password is: </i><b>{{ objects['password'] }},</b>
+        </p>
+    {% endif %}
+
+    <form action='/update' method='post'>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Name</span>
+            <input type="text" class="form-control" name='update_name' placeholder="Name" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <div class="input-group">
+            <span class="input-group-addon" id="basic-addon1">Password</span>
+            <input type="text" class="form-control" name='update_password' placeholder="Password" aria-describedby="basic-addon1">
+        </div>
+        <br>
+        <p><input type='submit' class="btn btn-primary btn-lg" value='change' /></p>
+    </form>
+{% endblock %}

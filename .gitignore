@@ -1,0 +1,6 @@
+*.pyc
+app/__pycache__/__init__.cpython-39.pyc
+app/__pycache__/api.cpython-39.pyc
+app/__pycache__/db.cpython-39.pyc
+app/__pycache__/models.cpython-39.pyc
+app/__pycache__/views.cpython-39.pyc
